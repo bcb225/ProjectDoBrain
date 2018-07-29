@@ -61,16 +61,16 @@ class ClusteringAnalyzer:
         zero_appended_arr = np.append(group_0,zero_arr)
         #reshape to 2-dimensional data matrix
         zero_reshaped_arr = zero_appended_arr.reshape(2,len(group_0))
-        #transpose the matrix to get (x,y) coordinates
+        #transpose the matrix to get csv format
         zero_transpose_arr = zero_reshaped_arr.T
 
-        #make an array filled with zeros
+        #make an array filled with ones
         one_arr = np.ones(len(group_1))
-        #append the zero array to existing 1-dimensional data input
+        #append the one array to existing 1-dimensional data input
         one_appended_arr = np.append(group_1,one_arr)
         #reshape to 2-dimensional data matrix
         one_reshaped_arr = one_appended_arr.reshape(2,len(group_1))
-        #transpose the matrix to get (x,y) coordinates
+        #transpose the matrix to get csv format
         one_transpose_arr = one_reshaped_arr.T
 
         result_arr = np.vstack([zero_transpose_arr,one_transpose_arr])
