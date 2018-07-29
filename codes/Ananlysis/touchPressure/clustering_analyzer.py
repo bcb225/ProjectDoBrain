@@ -10,6 +10,9 @@ class ClusteringAnalyzer:
         self.label_array = label_array
         self.data_array_1d = data_array
         
+        self.label_array = label_array[~np.isnan(data_array)]
+        self.data_array_1d = data_array[~np.isnan(data_array)]
+
         #make an array filled with zeros
         zero_arr = np.zeros(len(self.data_array_1d))
         #append the zero array to existing 1-dimensional data input
@@ -21,13 +24,18 @@ class ClusteringAnalyzer:
 
     def do_kmeans(self,n_clusters):
         self.X = np.array(self.data_matrix_2d)
-        self.kmeans = KMeans(n_clusters=n_clusters,random_state=0).fit(self.X)
+        if len(self.X) < 2:
+            self.kmeans = KMeans(n_clusters=1,random_state=0).fit(self.X)
+        else:
+            self.kmeans = KMeans(n_clusters=n_clusters,random_state=0).fit(self.X)
         return self.kmeans.labels_
 
     def draw_png(self,suptitle,subtitle_1,subtitle_2,xlabel,file_path):
         #rc('text',usetex = True)
         #rc('font',family = 'serif')
-
+        if len(self.data_array_1d) == 1:
+            return
+        
         #Kernel Density Estimation
         data_ser = pd.Series(self.data_array_1d)    #set Series
         ax1 = plt.subplot(211)  #ready first subplot (ax1 is axis)
@@ -36,6 +44,7 @@ class ClusteringAnalyzer:
         data_ser.plot.kde()     #calculate kernal density estimation
         
         #Clustering Scatter
+        self.check_and_swap()
         plt.subplot(212,sharex = ax1)   #reday second subplot with shared axis-X
         plt.title(subtitle_2)           #set subtitle
         plt.scatter(self.X[:,0],self.X[:,1],c=self.kmeans.labels_)  #scatter clustering result
@@ -47,13 +56,13 @@ class ClusteringAnalyzer:
         plt.suptitle(suptitle)  #set superior title
         plt.savefig(file_path)  #save figure as file_path
     
+        plt.clf()
+
     def write_result(self,file_path):
+        if len(self.data_array_1d) == 1:
+            return
         group_0 = self.label_array[self.kmeans.labels_ == 0]
         group_1 = self.label_array[self.kmeans.labels_ == 1]
-        print(self.label_array, self.kmeans.labels_)
-        print(self.kmeans.labels_ == 0)
-        print(group_0, group_1)
-        print(len(self.label_array),len(group_0), len(group_1))
 
         #make an array filled with zeros
         zero_arr = np.zeros(len(group_0))
@@ -81,3 +90,17 @@ class ClusteringAnalyzer:
             ,header='personId,groupId'
             ,comments=''
             )
+    
+    def check_and_swap(self):
+        group_0 = self.data_array_1d[self.kmeans.labels_ == 0]
+        group_1 = self.data_array_1d[self.kmeans.labels_ == 1]
+
+        #check whether group 0(contrl) has large pressure proportion than group 1(case)
+        if np.amin(group_0) >= np.amax(group_1):    #if so, do swap
+            self.do_swap()
+
+    def do_swap(self):
+        temp_labels = self.kmeans.labels_.copy()    #shallow copy of kmeans.labels_
+        self.kmeans.labels_[temp_labels == 0] = 1   #do swap
+        self.kmeans.labels_[temp_labels == 1] = 0
+        return
