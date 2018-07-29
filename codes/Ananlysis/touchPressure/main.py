@@ -20,6 +20,30 @@ handler = DataFrameHandler(loaded_df)
 
 sorted_unique_index = handler.get_unique_index()
 
+
+""" code for total clustering --> need a function to remove outliers
+true_answer_df = handler.filter_rows_by_correct(loaded_df,True)
+false_answer_df = handler.filter_rows_by_correct(loaded_df,False)
+    
+true_mean_pressure_df = handler.get_mean_touch_pressure(true_answer_df)
+false_mean_pressure_df = handler.get_mean_touch_pressure(false_answer_df)
+    
+proportion_person_array, mean_pressure_true_array,mean_pressure_false_array,proportion_data_array = handler.join_df_and_divide_pressure(true_mean_pressure_df,false_mean_pressure_df,'person')
+    
+if len(proportion_person_array) == 0:
+	pass
+else:
+	png_path = '../../../files/clustering/pressureProportion/png/total_result.png'
+	csv_path = '../../../files/clustering/pressureProportion/csv/total_result.csv'
+	proportion_pressure_analyzer = ClusteringAnalyzer(proportion_person_array, mean_pressure_true_array,mean_pressure_false_array,proportion_data_array)
+	proportion_pressure_analyzer.do_kmeans(n_clusters=2)
+	proportion_pressure_analyzer.draw_png(
+	suptitle='',subtitle_1='Kernel Density Estimation',subtitle_2='KMeans Clustering'
+            ,xlabel='Mean Wrong Pressure / Mean Correct Pressure',file_path =png_path
+            )
+	proportion_pressure_analyzer.write_result(file_path=csv_path)
+"""
+
 for index in sorted_unique_index:
     index_list = index.tolist()
     selected_df_by_index = handler.get_rows_by_index(index_list)
