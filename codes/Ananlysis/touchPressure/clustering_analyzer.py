@@ -6,10 +6,11 @@ import matplotlib.pyplot as plt
 import csv
 
 class ClusteringAnalyzer:
-    def __init__(self, label_array, data_array):
+    def __init__(self, label_array, mean_true_pressure_array,mean_false_pressure_array ,data_array):
         self.label_array = label_array[~(np.isnan(data_array)|np.isinf(data_array))]
         self.data_array_1d = data_array[~(np.isnan(data_array)|np.isinf(data_array))]
-
+        self.mean_true_pressure_array = mean_true_pressure_array[~(np.isnan(data_array)|np.isinf(data_array))]
+        self.mean_false_pressure_array = mean_false_pressure_array[~(np.isnan(data_array)|np.isinf(data_array))]
         #make an array filled with zeros
         zero_arr = np.zeros(len(self.data_array_1d))
         #append the zero array to existing 1-dimensional data input
@@ -60,13 +61,21 @@ class ClusteringAnalyzer:
             return
         group_0 = self.label_array[self.kmeans.labels_ == 0]
         group_1 = self.label_array[self.kmeans.labels_ == 1]
-
+        group_0_false = self.mean_false_pressure_array[self.kmeans.labels_ == 0]
+        group_1_false = self.mean_false_pressure_array[self.kmeans.labels_ == 1]
+        group_0_true = self.mean_true_pressure_array[self.kmeans.labels_ == 0]
+        group_1_true = self.mean_true_pressure_array[self.kmeans.labels_ == 1]
+        group_0_proportion = self.data_array_1d[self.kmeans.labels_ == 0]
+        group_1_proportion = self.data_array_1d[self.kmeans.labels_ == 1]
         #make an array filled with zeros
         zero_arr = np.zeros(len(group_0))
         #append the zero array to existing 1-dimensional data input
         zero_appended_arr = np.append(group_0,zero_arr)
+        zero_appended_false_pressure = np.append(zero_appended_arr,group_0_false)
+        zero_appended_true_pressure = np.append(zero_appended_false_pressure,group_0_true)
+        zero_appended_proportion_pressure = np.append(zero_appended_true_pressure,group_0_proportion)
         #reshape to 2-dimensional data matrix
-        zero_reshaped_arr = zero_appended_arr.reshape(2,len(group_0))
+        zero_reshaped_arr = zero_appended_proportion_pressure.reshape(5,len(group_0))
         #transpose the matrix to get csv format
         zero_transpose_arr = zero_reshaped_arr.T
 
@@ -74,8 +83,11 @@ class ClusteringAnalyzer:
         one_arr = np.ones(len(group_1))
         #append the one array to existing 1-dimensional data input
         one_appended_arr = np.append(group_1,one_arr)
+        one_appended_false_pressure = np.append(one_appended_arr,group_1_false)
+        one_appended_true_pressure = np.append(one_appended_false_pressure,group_1_true)
+        one_appended_proportion_pressure = np.append(one_appended_true_pressure,group_1_proportion)
         #reshape to 2-dimensional data matrix
-        one_reshaped_arr = one_appended_arr.reshape(2,len(group_1))
+        one_reshaped_arr = one_appended_proportion_pressure.reshape(5,len(group_1))
         #transpose the matrix to get csv format
         one_transpose_arr = one_reshaped_arr.T
 
@@ -84,7 +96,7 @@ class ClusteringAnalyzer:
             fname=file_path
             ,X=result_arr,delimiter=','
             ,fmt='%s'
-            ,header='personId,groupId'
+            ,header='personId,groupId,falsePressure,truePressure,ProportionPressure'
             ,comments=''
             )
     

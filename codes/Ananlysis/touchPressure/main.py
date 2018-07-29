@@ -29,7 +29,7 @@ for index in sorted_unique_index:
     true_mean_pressure_df = handler.get_mean_touch_pressure(true_answer_df)
     false_mean_pressure_df = handler.get_mean_touch_pressure(false_answer_df)
     
-    proportion_person_array, proportion_data_array = handler.join_df_and_divide_pressure(true_mean_pressure_df,false_mean_pressure_df,'person')
+    proportion_person_array, mean_pressure_true_array,mean_pressure_false_array,proportion_data_array = handler.join_df_and_divide_pressure(true_mean_pressure_df,false_mean_pressure_df,'person')
     
     if len(proportion_person_array) == 0:
         continue
@@ -40,7 +40,7 @@ for index in sorted_unique_index:
             'Clustering data from contentIndex[%d]:questionIndex[%d]:derivedQuestionIndex[%d]\t%d users'
             %(index_list[0],index_list[1],index_list[2],len(proportion_person_array) )
             )
-        proportion_pressure_analyzer = ClusteringAnalyzer(proportion_person_array,proportion_data_array)
+        proportion_pressure_analyzer = ClusteringAnalyzer(proportion_person_array, mean_pressure_true_array,mean_pressure_false_array,proportion_data_array)
         proportion_pressure_analyzer.do_kmeans(n_clusters=2)
         proportion_pressure_analyzer.draw_png(
             suptitle='',subtitle_1='Kernel Density Estimation',subtitle_2='KMeans Clustering'
