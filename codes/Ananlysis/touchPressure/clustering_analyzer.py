@@ -15,9 +15,9 @@ class ClusteringAnalyzer:
         #transpose the matrix to get (x,y) coordinates
         self.data_matrix_2d = reshaped_arr.T
 
-    def do_kmeans(self):
+    def do_kmeans(self,n_clusters):
         X = np.array(self.data_matrix_2d)
-        kmeans = KMeans(n_clusters=2,random_state=0).fit(X)
+        kmeans = KMeans(n_clusters=n_clusters,random_state=0).fit(X)
         return kmeans.labels_
 
     def draw_png(self):

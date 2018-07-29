@@ -22,8 +22,13 @@ sorted_unique_index = handler.get_unique_index()
 
 selected_df_by_index = handler.get_rows_by_index([1,6,0])
 
-person_array, data_array = handler.get_mean_touch_pressure(selected_df_by_index)
+true_answer_df = handler.filter_rows_by_correct(selected_df_by_index,True)
+false_anwer_df = handler.filter_rows_by_correct(selected_df_by_index,False)
 
-analyzer = ClusteringAnalyzer(person_array, data_array)
+true_mean_pressure_df = handler.get_mean_touch_pressure(true_answer_df)
+false_mean_pressure_df = handler.get_mean_touch_pressure(false_anwer_df)
 
-print (analyzer.do_kmeans())
+proportion_person_array, proportion_data_array = handler.join_df_and_divide_pressure(true_mean_pressure_df,false_mean_pressure_df,'person')
+
+proportion_pressure_analyzer = ClusteringAnalyzer(proportion_person_array,proportion_data_array)
+print(proportion_pressure_analyzer.do_kmeans(2))
