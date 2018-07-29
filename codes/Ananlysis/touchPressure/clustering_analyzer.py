@@ -3,6 +3,8 @@ import numpy as np
 from sklearn.cluster import KMeans
 from matplotlib import rc
 import matplotlib.pyplot as plt
+import csv
+
 class ClusteringAnalyzer:
     def __init__(self, label_array, data_array):
         self.label_array = label_array
@@ -44,3 +46,38 @@ class ClusteringAnalyzer:
 
         plt.suptitle(suptitle)  #set superior title
         plt.savefig(file_path)  #save figure as file_path
+    
+    def write_result(self,file_path):
+        group_0 = self.label_array[self.kmeans.labels_ == 0]
+        group_1 = self.label_array[self.kmeans.labels_ == 1]
+        print(self.label_array, self.kmeans.labels_)
+        print(self.kmeans.labels_ == 0)
+        print(group_0, group_1)
+        print(len(self.label_array),len(group_0), len(group_1))
+
+        #make an array filled with zeros
+        zero_arr = np.zeros(len(group_0))
+        #append the zero array to existing 1-dimensional data input
+        zero_appended_arr = np.append(group_0,zero_arr)
+        #reshape to 2-dimensional data matrix
+        zero_reshaped_arr = zero_appended_arr.reshape(2,len(group_0))
+        #transpose the matrix to get (x,y) coordinates
+        zero_transpose_arr = zero_reshaped_arr.T
+
+        #make an array filled with zeros
+        one_arr = np.ones(len(group_1))
+        #append the zero array to existing 1-dimensional data input
+        one_appended_arr = np.append(group_1,one_arr)
+        #reshape to 2-dimensional data matrix
+        one_reshaped_arr = one_appended_arr.reshape(2,len(group_1))
+        #transpose the matrix to get (x,y) coordinates
+        one_transpose_arr = one_reshaped_arr.T
+
+        result_arr = np.vstack([zero_transpose_arr,one_transpose_arr])
+        np.savetxt(
+            fname=file_path
+            ,X=result_arr,delimiter=','
+            ,fmt='%s'
+            ,header='personId,groupId'
+            ,comments=''
+            )

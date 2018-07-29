@@ -38,3 +38,4 @@ proportion_pressure_analyzer.draw_png(
     suptitle='',subtitle_1='Kernel Density Estimation',subtitle_2='KMeans Clustering'
     ,xlabel='Mean Wrong Pressure / Mean Correct Pressure',file_path ='test.png'
     )
+proportion_pressure_analyzer.write_result(file_path='test.csv')
