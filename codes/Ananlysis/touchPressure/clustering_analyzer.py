@@ -7,11 +7,8 @@ import csv
 
 class ClusteringAnalyzer:
     def __init__(self, label_array, data_array):
-        self.label_array = label_array
-        self.data_array_1d = data_array
-        
-        self.label_array = label_array[~np.isnan(data_array)]
-        self.data_array_1d = data_array[~np.isnan(data_array)]
+        self.label_array = label_array[~(np.isnan(data_array)|np.isinf(data_array))]
+        self.data_array_1d = data_array[~(np.isnan(data_array)|np.isinf(data_array))]
 
         #make an array filled with zeros
         zero_arr = np.zeros(len(self.data_array_1d))
