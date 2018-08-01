@@ -56,7 +56,16 @@ class ClusteringAnalyzer:
     
         plt.clf()
 
-    def write_result(self,file_path):
+	def write_result_for_true(self,file_path):
+		if len(self.data_array_1d) == 1:
+			return 
+		
+		pass
+	
+	def write_result_for_false(self,file_path):
+		pass
+
+    def write_result_for_proportion(self,file_path):
         if len(self.data_array_1d) == 1:
             return
         group_0 = self.label_array[self.kmeans.labels_ == 0]
