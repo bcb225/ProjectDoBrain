@@ -56,4 +56,3 @@ class DataFrameHandler():
         mean_pressure_false = df_target['touchPressure_y'].values
         true_false_pressure_proportion = np.divide(mean_pressure_false, mean_pressure_true)
         return person_array, mean_pressure_true, mean_pressure_false, true_false_pressure_proportion
-    
