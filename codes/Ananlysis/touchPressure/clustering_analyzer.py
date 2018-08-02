@@ -7,10 +7,16 @@ import csv
 
 class ClusteringAnalyzer:
     def __init__(self, label_array, mean_true_pressure_array,mean_false_pressure_array ,data_array):
+        
         self.label_array = label_array[~(np.isnan(data_array)|np.isinf(data_array))]
         self.data_array_1d = data_array[~(np.isnan(data_array)|np.isinf(data_array))]
+        
         self.mean_true_pressure_array = mean_true_pressure_array[~(np.isnan(data_array)|np.isinf(data_array))]
         self.mean_false_pressure_array = mean_false_pressure_array[~(np.isnan(data_array)|np.isinf(data_array))]
+        outlier_1 = self.is_out_lier_z(self.data_array_1d)
+        print(outlier_1)
+        outlier_2 = self.is_out_lier(self.data_array_1d)
+        print(outlier_2)	
         #make an array filled with zeros
         zero_arr = np.zeros(len(self.data_array_1d))
         #append the zero array to existing 1-dimensional data input
@@ -19,7 +25,22 @@ class ClusteringAnalyzer:
         reshaped_arr = appended_arr.reshape(2,len(self.data_array_1d))
         #transpose the matrix to get (x,y) coordinates
         self.data_matrix_2d = reshaped_arr.T
-
+        
+    def is_out_lier_z (self,data_array):
+        threshold = 3
+        
+        mean = np.mean(data_array)
+        stdev = np.std(data_array)
+        z_scores = [(y - mean) / stdev for y in data_array]
+        
+        return np.where(np.abs(z_scores) > threshold)
+        
+    def is_out_lier(self, data_array):
+        threshold = 3.5
+        median = np.median(data_array)
+        median_absolute_deviation = np.median([np.abs(y-median) for y in data_array	])
+        modified_z_scores = [0.6745 * (y - median) / median_absolute_deviation for y in data_array]
+        return (np.where(np.abs(modified_z_scores) > threshold))
     def do_kmeans(self,n_clusters):
         self.X = np.array(self.data_matrix_2d)
         if len(self.X) < 2:

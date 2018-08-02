@@ -15,7 +15,9 @@ class DataFrameHandler():
         unique_index = all_index.drop_duplicates()
         sorted_unique_index = unique_index.sort_values(by=['contentIndex','questionIndex','derivedQuestionIndex'])
         return sorted_unique_index.values
-    
+    def get_df_object(self):
+        return self.df_object
+        
     def get_rows_by_index(self, index_list):
         #return rows selected by index as Pandas DataFrame
 
@@ -31,7 +33,7 @@ class DataFrameHandler():
             & (self.df_object.derivedQuestionIndex == derivedQuestionIndex) 
             ]
         return selected_df
-    def filter_rows_by_correct(self, df_source,status):
+    def filter_rows_by_correct(self,df_source,status):
         #return rows filtered by isOnCorrectAnswer status as Pandas DataFrame
         filtered_df = df_source[df_source.isOnCorrectAnswer == status]
         return filtered_df
