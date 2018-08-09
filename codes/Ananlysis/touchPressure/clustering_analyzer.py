@@ -13,10 +13,13 @@ class ClusteringAnalyzer:
         
         self.mean_true_pressure_array = mean_true_pressure_array[~(np.isnan(data_array)|np.isinf(data_array))]
         self.mean_false_pressure_array = mean_false_pressure_array[~(np.isnan(data_array)|np.isinf(data_array))]
-        outlier_1 = self.is_out_lier_z(self.data_array_1d)
-        print(outlier_1)
-        outlier_2 = self.is_out_lier(self.data_array_1d)
-        print(outlier_2)	
+        
+        mask_z = self.is_outlier_z(self.data_array_1d)
+
+        self.label_array = self.label_array[~(mask_z)]
+        self.data_array_1d = self.data_array_1d[~(mask_z)]
+        self.mean_true_pressure_array = self.mean_true_pressure_array[~(mask_z)]
+        self.mean_false_pressure_array = self.mean_false_pressure_array[~(mask_z)]
         #make an array filled with zeros
         zero_arr = np.zeros(len(self.data_array_1d))
         #append the zero array to existing 1-dimensional data input
@@ -26,16 +29,15 @@ class ClusteringAnalyzer:
         #transpose the matrix to get (x,y) coordinates
         self.data_matrix_2d = reshaped_arr.T
         
-    def is_out_lier_z (self,data_array):
+    def is_outlier_z (self,data_array):
         threshold = 3
         
         mean = np.mean(data_array)
         stdev = np.std(data_array)
         z_scores = [(y - mean) / stdev for y in data_array]
+        return (np.abs(z_scores) > threshold)
         
-        return np.where(np.abs(z_scores) > threshold)
-        
-    def is_out_lier(self, data_array):
+    def is_outlier(self, data_array):
         threshold = 3.5
         median = np.median(data_array)
         median_absolute_deviation = np.median([np.abs(y-median) for y in data_array	])
