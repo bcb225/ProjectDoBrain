@@ -15,7 +15,7 @@ class MainWrapper:
             
             true_mean_pressure_df = self.handler.get_mean_touch_pressure(true_answer_df)
             false_mean_pressure_df = self.handler.get_mean_touch_pressure(false_answer_df)
-            proportion_person_array, mean_pressure_true_array,mean_pressure_false_array,proportion_data_array = self.handler.join_df_and_divide_pressure(true_mean_pressure_df,false_mean_pressure_df,'person')
+            proportion_person_array, mean_pressure_true_array,mean_pressure_false_array,proportion_data_array = self.handler.join_df_and_divide_pressure(true_mean_pressure_df,false_mean_pressure_df,'person_id')
             if len(proportion_person_array) == 0:
                 continue
             else:
@@ -39,7 +39,7 @@ class MainWrapper:
         true_mean_pressure_df = self.handler.get_mean_touch_pressure(true_answer_df)
         false_mean_pressure_df = self.handler.get_mean_touch_pressure(false_answer_df)
         
-        proportion_person_array, mean_pressure_true_array,mean_pressure_false_array,proportion_data_array = self.handler.join_df_and_divide_pressure(true_mean_pressure_df,false_mean_pressure_df,'person')
+        proportion_person_array, mean_pressure_true_array,mean_pressure_false_array,proportion_data_array = self.handler.join_df_and_divide_pressure(true_mean_pressure_df,false_mean_pressure_df,'person_id')
         if len(proportion_person_array) == 0:
             pass
         else:
