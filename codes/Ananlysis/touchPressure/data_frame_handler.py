@@ -45,13 +45,13 @@ class DataFrameHandler():
         cleaned_df = df_source[df_source.touchPressure != -1]
 
         #group by person, screenWidth, screenHeiht and calculate mean value of touchpressure
-        grouped_df = cleaned_df.groupby(['person','screenWidth','screenHeight'])['touchPressure'].mean().reset_index()
+        grouped_df = cleaned_df.groupby(['person_id','screenWidth','screenHeight'])['touchPressure'].mean().reset_index()
         return grouped_df
 
     def join_df_and_divide_pressure(self, df_source_left, df_source_right,key):
         #return joined DataFrame
         df_target = pd.merge(df_source_left,df_source_right,on=key)
-        person_array = df_target['person'].values
+        person_array = df_target['person_id'].values
         mean_pressure_true = df_target['touchPressure_x'].values
         mean_pressure_false = df_target['touchPressure_y'].values
         true_false_pressure_proportion = np.divide(mean_pressure_false, mean_pressure_true)
