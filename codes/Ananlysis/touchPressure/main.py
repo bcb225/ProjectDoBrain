@@ -21,5 +21,5 @@ handler = DataFrameHandler(loaded_df)
 
 wrapper = MainWrapper(handler)
 print(wrapper)
-#wrapper.proportion_pressure_of_question()
-wrapper.proportion_pressure_of_all()
+wrapper.proportion_pressure_of_question()
+#wrapper.proportion_pressure_of_all()
