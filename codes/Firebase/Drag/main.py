@@ -1,6 +1,8 @@
 import sys
 from firebase_connector import FirebaseConnector
-import requests
+from rest_handler import RestHandler
+from json_handler import JsonHandler
+from csv_handler import CsvHandler
 
 def parse_commands(argv):
     from optparse import OptionParser
@@ -17,13 +19,24 @@ options = parse_commands(sys.argv[1:])
 with open(options.person_file) as person_file:
     person_list = person_file.read().splitlines()
 
-base_url = 'https://dobrain-pro.firebaseio.com/drag_data/iOS/'
+header_list = ["person_id", "updateDateTime", "screenHeight", "screenWidth",
+                "level", "contentIndex", "questionIndex", "derivedQuestionIndex",
+                "questionManagerCategory", "dragDataSetCreationDateTime",
+                "dragDataCreationDateTime", "isOnCorrectAnswer", 
+                "posX", "posY", "touchPressure"
+                ]
 
-for person in person_list:
-    target_url = base_url + person +'.json?print=pretty'
-    resp = requests.get(url=target_url)
-    json_text = resp.json()
-    print(json_text)
+rest_handler = RestHandler()
+json_handler = JsonHandler()
+csv_handler = CsvHandler(filepath=options.output_file,header_list=header_list)
+
+for person_id in person_list:
+    json_result = rest_handler.get_json_by_person_id(person_id)
+    result_dict_list = json_handler.json_to_dict_list(json_result,person_id)
+    csv_handler.dict_to_csv(dict_list=result_dict_list)
+    print(person_id,len(result_dict_list))
+
+
 """connector = FirebaseConnector(options.key_file)
 
 data = connector.get_drag_data_by_person_id('000123DB-6507-424D-86A2-770DB247D396')

@@ -1,0 +1,41 @@
+interface RootObject {
+  _userLevels?: UserLevel[];
+  _updateDateTime: string;
+  _screenWidth: number;
+  _screenHeight: number;
+  contentDragData?: ContentDragDatum[];
+}
+
+interface UserLevel {
+  _level: string;
+  contentDragData: ContentDragDatum[];
+}
+
+interface ContentDragDatum {
+  questionDragData: QuestionDragDatum[];
+  _index: number;
+}
+
+interface QuestionDragDatum {
+  derivedQuestionDragData: DerivedQuestionDragDatum[];
+  _questionManagerCategory?: string;
+  _index: number;
+}
+
+interface DerivedQuestionDragDatum {
+  dragDataSets: DragDataSet[];
+  _index: number;
+}
+
+interface DragDataSet {
+  creationDateTime: string;
+  dragData: DragDatum[];
+}
+
+interface DragDatum {
+  isOnCorrectAnswer: boolean;
+  creationDateTime: string;
+  touchPressure: number;
+  posX: number;
+  posY: number;
+}
