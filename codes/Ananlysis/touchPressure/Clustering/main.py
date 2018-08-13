@@ -1,4 +1,7 @@
 import sys
+from os import path
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+
 from csv_loader import CsvLoader
 from data_frame_handler import DataFrameHandler
 from clustering_analyzer import ClusteringAnalyzer
