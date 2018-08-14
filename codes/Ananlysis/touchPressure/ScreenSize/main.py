@@ -3,7 +3,7 @@ from os import path
 sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
 from data_frame_handler import  DataFrameHandler
 from csv_loader import CsvLoader
-
+from box_plot_analyzer import BoxPlotAnalyzer
 def parse_commands(argv):
     from optparse import OptionParser
     parser = OptionParser('"')
@@ -19,11 +19,12 @@ loaded_drag_df = drag_loader.load()
 
 drag_handler = DataFrameHandler(loaded_drag_df)
 
-drag_handler.remove_minus_pressure()
 #get screen size (x,y) set
 screen_size_dict_list = drag_handler.get_screen_size_set()
 
-for screen_size_dict in screen_size_dict_list:
-    selected_df_by_screen_size = drag_handler.get_rows_by_screen_size(screen_size_dict)
-    print(screen_size_dict)
-    print(selected_df_by_screen_size)
+drag_handler.remove_minus_pressure()
+
+print (screen_size_dict_list)
+box_plot_analyzer = BoxPlotAnalyzer(df_handler = drag_handler)
+
+box_plot_analyzer.draw_box_plot()
