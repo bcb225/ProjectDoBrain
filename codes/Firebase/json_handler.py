@@ -74,3 +74,11 @@ class JsonHandler:
                             }
                             result_dict_list.append(temp_dict)
         return result_dict_list
+    
+    def json_person_id_to_dict_list(self, json_source):
+        print(json_source)
+        json_text = json.dumps(json_source)
+        json_data = json.loads(json_text)
+        print(json_data.keys())
+        
+                #result_dict_list = []
