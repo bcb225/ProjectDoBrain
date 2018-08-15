@@ -15,7 +15,6 @@ class RestHandler:
     def get_json_of_person_id(self):
         target_url = self.user_url +'.json' +'?shallow=true'
         resp = requests.get(url=target_url)
-        print(resp.text)
         json_text = resp.json()
         json_result = json.dumps(json_text)
         return json_result

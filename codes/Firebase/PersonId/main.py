@@ -14,7 +14,7 @@ def parse_commands(argv):
     options, otherjunk = parser.parse_args(argv)
     return options
 
-#make person_id csv
+#make person_id csv without HEADER
 
 options = parse_commands(sys.argv[1:])
 
