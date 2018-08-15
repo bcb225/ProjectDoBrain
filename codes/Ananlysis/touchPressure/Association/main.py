@@ -28,7 +28,18 @@ drag_handler = DataFrameHandler(loaded_drag_df)
 #clean drag_handler df object (remove -1 touchPressure)
 drag_handler.remove_minus_pressure()
 
-#get sorted unique index of drag data
+#clean drag_handler df object (remove 1 touchPressure)
+#ONLY FOR TEST
+#
+#
+drag_handler.remove_one_pressure()
+#
+#
+#
+#
+#
+
+# get sorted unique index of drag data
 sorted_unique_index = drag_handler.get_unique_index()
 
 #get first content, game index of drag data
