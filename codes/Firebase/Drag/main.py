@@ -34,11 +34,13 @@ json_handler = JsonHandler()
 csv_handler = CsvHandler(filepath=options.output_file,header_list=header_list)
 
 for person_id in person_list:
-    json_result = rest_handler.get_json_by_person_id(person_id)
-    result_dict_list = json_handler.json_to_dict_list(json_result,person_id)
-    csv_handler.dict_to_csv(dict_list=result_dict_list)
-    print(person_id,len(result_dict_list))
-
+    try:
+        json_result = rest_handler.get_json_by_person_id(person_id)
+        result_dict_list = json_handler.json_to_dict_list(json_result,person_id)
+        csv_handler.dict_to_csv(dict_list=result_dict_list)
+        print(person_id,len(result_dict_list))
+    except:
+        pass
 
 """connector = FirebaseConnector(options.key_file)
 
