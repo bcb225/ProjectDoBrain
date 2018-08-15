@@ -80,7 +80,7 @@ class JsonHandler:
         json_data = json.loads(json_source)
         person_id_list = json_data.keys()
         result_dict_list = []
-        p = re.math('\w+\-\w+\-\w+\-\w+\-\w+')
+        p = re.compile('\w+\-\w+\-\w+\-\w+\-\w+')
         for elm in person_id_list:
             if p.match(elm):
                 temp_dict = {
