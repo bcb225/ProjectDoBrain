@@ -18,7 +18,6 @@ options = parse_commands(sys.argv[1:])
 
 drag_loader = CsvLoader(options.drag_file)
 loaded_drag_df = drag_loader.load()
-
 user_loader = CsvLoader(options.user_file)
 loaded_user_df = user_loader.load()
 
