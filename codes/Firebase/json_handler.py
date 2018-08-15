@@ -90,13 +90,17 @@ class JsonHandler:
     def json_user_data_to_dict_list(self, json_source, person_id):
         json_data = json.loads(json_source)
         result_dict_list = []
-        level = json_data['level']
+        try :
+            level = json_data['level']
+        
+            temp_dict ={
+                'person_id' : person_id,
+                'level' : level
+            }
 
-        temp_dict ={
-            'person_id' : person_id,
-            'level' : level
-        }
+            result_dict_list.append(temp_dict)
 
-        result_dict_list.append(temp_dict)
+            return result_dict_list
 
-        return result_dict_list
+        except:
+            return result_dict_list
