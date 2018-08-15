@@ -22,7 +22,6 @@ loaded_drag_df = drag_loader.load()
 user_loader = CsvLoader(options.user_file)
 loaded_user_df = user_loader.load()
 
-user_handler = DataFrameHandler(loaded_user_df)
 drag_handler = DataFrameHandler(loaded_drag_df)
 
 #clean drag_handler df object (remove -1.0000 touchPressure)
