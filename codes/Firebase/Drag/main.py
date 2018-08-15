@@ -40,6 +40,7 @@ for person_id in person_list:
         csv_handler.dict_to_csv(dict_list=result_dict_list)
         print(person_id,len(result_dict_list))
     except:
+        print('EXCEPTION',person_id)
         pass
 
 """connector = FirebaseConnector(options.key_file)
