@@ -25,19 +25,11 @@ loaded_user_df = user_loader.load()
 user_handler = DataFrameHandler(loaded_user_df)
 drag_handler = DataFrameHandler(loaded_drag_df)
 
-#clean drag_handler df object (remove -1 touchPressure)
+#clean drag_handler df object (remove -1.0000 touchPressure)
 drag_handler.remove_minus_pressure()
 
-#clean drag_handler df object (remove 1 touchPressure)
-#ONLY FOR TEST
-#
-#
-#drag_handler.remove_one_pressure()
-#
-#
-#
-#
-#
+#clean drag_handler df object (remove 1.0000 touchPressure of drag_handler's df_object)
+drag_handler.remove_one_pressure()
 
 # get sorted unique index of drag data
 sorted_unique_index = drag_handler.get_unique_index()
@@ -51,18 +43,12 @@ selected_drag_df_by_index = drag_handler.get_rows_by_index(first_index_list)
 #group by personId and get mean touch pressure of the game
 mean_touch_pressure_of_selected_drag_df = drag_handler.get_mean_touch_pressure(selected_drag_df_by_index)
 
-print(mean_touch_pressure_of_selected_drag_df)
-#remove mean 1
+#clean mean touch pressure (grouped) as df_source (remove 1.0000 mean touchPressure of df_source)
+#NOT drag_handler's df_object
 cleaned_mean_touch_pressure_of_selected_drag_df = drag_handler.remove_one_pressure_of_source(mean_touch_pressure_of_selected_drag_df)
+
 #join user level table and drag data table with key person_id
 joined_df_by_person_id = drag_handler.join_df_by_key(loaded_user_df,cleaned_mean_touch_pressure_of_selected_drag_df,'person_id')
-
-print('loaded_user_df',loaded_user_df)
-#join user level table and drag data table with key person_id
-#joined_df_by_person_id = drag_handler.join_df_by_key(loaded_user_df,mean_touch_pressure_of_selected_drag_df,'person_id')
-
-
-print(joined_df_by_person_id)
 
 #create AssociationAnalyzer module
 association_analyzer = AssociationAnalyzer(joined_df_by_person_id)
