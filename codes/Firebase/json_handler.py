@@ -80,11 +80,14 @@ class JsonHandler:
         json_data = json.loads(json_source)
         person_id_list = json_data.keys()
         result_dict_list = []
+        p = re.math('\w+\-\w+\-\w+\-\w+\-\w+')
         for elm in person_id_list:
-            temp_dict = {
-                "person_id" : elm
-            }
-            result_dict_list.append(temp_dict)
+            if p.match(elm):
+                temp_dict = {
+                    "person_id" : elm
+                }
+                print(temp_dict)
+                result_dict_list.append(temp_dict)
         return result_dict_list
     
     def json_user_data_to_dict_list(self, json_source, person_id):
