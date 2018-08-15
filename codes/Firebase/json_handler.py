@@ -1,5 +1,5 @@
 import json
-
+import regex as re
 class JsonHandler:
     def __init__(self):
         pass
