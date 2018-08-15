@@ -82,6 +82,11 @@ class DataFrameHandler():
     def remove_one_pressure(self):
         cleaned_df = self.df_object[self.df_object.touchPressure != 1]
         self.df_object = cleaned_df
+
+    def remove_one_pressure_of_source(self, df_source):
+        cleaned_df = df_source[df_source.touchPressure != 1]
+        return cleaned_df
+
     def get_rows_by_screen_size(self, screen_size_dict):
         #selection
         selected_df = self.df_object[

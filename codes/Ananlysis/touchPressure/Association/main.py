@@ -32,7 +32,7 @@ drag_handler.remove_minus_pressure()
 #ONLY FOR TEST
 #
 #
-drag_handler.remove_one_pressure()
+#drag_handler.remove_one_pressure()
 #
 #
 #
@@ -51,8 +51,16 @@ selected_drag_df_by_index = drag_handler.get_rows_by_index(first_index_list)
 #group by personId and get mean touch pressure of the game
 mean_touch_pressure_of_selected_drag_df = drag_handler.get_mean_touch_pressure(selected_drag_df_by_index)
 
+print(mean_touch_pressure_of_selected_drag_df)
+#remove mean 1
+cleaned_mean_touch_pressure_of_selected_drag_df = drag_handler.remove_one_pressure_of_source(mean_touch_pressure_of_selected_drag_df)
 #join user level table and drag data table with key person_id
-joined_df_by_person_id = drag_handler.join_df_by_key(loaded_user_df,mean_touch_pressure_of_selected_drag_df,'person_id')
+joined_df_by_person_id = drag_handler.join_df_by_key(loaded_user_df,cleaned_mean_touch_pressure_of_selected_drag_df,'person_id')
+
+print('loaded_user_df',loaded_user_df)
+#join user level table and drag data table with key person_id
+#joined_df_by_person_id = drag_handler.join_df_by_key(loaded_user_df,mean_touch_pressure_of_selected_drag_df,'person_id')
+
 
 print(joined_df_by_person_id)
 
@@ -64,4 +72,3 @@ association_analyzer.t_test()
 
 #draw box plot
 association_analyzer.draw_box_plot()
-#print(joined_df_by_person_id)
