@@ -34,16 +34,23 @@ sorted_unique_index = drag_handler.get_unique_index()
 #get first content, game index of drag data
 first_index_list = sorted_unique_index[0]
 
+#select first game as interest
 selected_drag_df_by_index = drag_handler.get_rows_by_index(first_index_list)
 
+#group by personId and get mean touch pressure of the game
 mean_touch_pressure_of_selected_drag_df = drag_handler.get_mean_touch_pressure(selected_drag_df_by_index)
 
+#join user level table and drag data table with key person_id
 joined_df_by_person_id = drag_handler.join_df_by_key(loaded_user_df,mean_touch_pressure_of_selected_drag_df,'person_id')
 
 print(joined_df_by_person_id)
+
+#create AssociationAnalyzer module
 association_analyzer = AssociationAnalyzer(joined_df_by_person_id)
 
+#t_test
 association_analyzer.t_test()
 
+#draw box plot
 association_analyzer.draw_box_plot()
 #print(joined_df_by_person_id)
