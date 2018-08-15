@@ -36,8 +36,14 @@ first_index_list = sorted_unique_index[0]
 
 selected_drag_df_by_index = drag_handler.get_rows_by_index(first_index_list)
 
-joined_df_by_person_id = drag_handler.join_df_by_key(loaded_user_df,selected_drag_df_by_index,'person_id')
+mean_touch_pressure_of_selected_drag_df = drag_handler.get_mean_touch_pressure(selected_drag_df_by_index)
 
-association_analyzer = AssociationAnalyzer(joined_df_by_person_id)
+joined_df_by_person_id = drag_handler.join_df_by_key(loaded_user_df,mean_touch_pressure_of_selected_drag_df,'person_id')
 
 print(joined_df_by_person_id)
+association_analyzer = AssociationAnalyzer(joined_df_by_person_id)
+
+association_analyzer.t_test()
+
+association_analyzer.draw_box_plot()
+#print(joined_df_by_person_id)
