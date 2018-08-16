@@ -1,0 +1,4 @@
+group 1,group 2,t-statistic,p-value
+A,B,-1.273461853911684,0.29256796360350817
+A,C,nan,nan
+B,C,nan,nan
