@@ -30,4 +30,4 @@ unique_person_and_time_list = df_handler.get_unique_person_and_time(
     df_source = first_game_df
 )
 print(first_game_df)
-print(unique_person_and_time_list)
+print(len(unique_person_and_time_list))
