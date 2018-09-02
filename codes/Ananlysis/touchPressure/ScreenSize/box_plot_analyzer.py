@@ -18,6 +18,7 @@ class BoxPlotAnalyzer:
         for screen_size_dict in self.screen_size_dict_list:
             selected_df_by_screen_size = df_handler.get_rows_by_screen_size(self.df_object,screen_size_dict)
             touchPressure_array = selected_df_by_screen_size['touchPressure'].values
+            print(screen_size_dict, selected_df_by_screen_size.shape[0])
             np_list.append(touchPressure_array)
         fig, ax1 = plt.subplots()
         xtick_list =[]
