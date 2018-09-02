@@ -85,3 +85,13 @@ def get_rows_by_screen_size(df_source, screen_size_dict):
         ]
     return selected_df
 
+def get_unique_person_and_time(df_source):
+    #project columns
+    person_and_time = df_source[
+        ['person','updateDateTime']
+        ]
+    #drop duplicated rows
+    unique_person_and_time = person_and_time.drop_duplicates()
+    sorted_unique_person_and_time = unique_person_and_time.sort_values(by=['person','updateDateTime'])
+    return sorted_unique_person_and_time.values
+
