@@ -12,7 +12,19 @@ def get_unique_index(df_source):
     unique_index = all_index.drop_duplicates()
     sorted_unique_index = unique_index.sort_values(by=['contentIndex','questionIndex','derivedQuestionIndex'])
     return sorted_unique_index.values
+def get_row_by_person_and_time(df_source, index_list):
+    #return rows selected by index as Pandas DataFrame
 
+    #parse parameter
+    person_id = index_list[0]
+    updateDateTime = index_list[1]
+
+    #selection
+    selected_df = df_source[
+        (df_source.person_id == person_id)
+        & (df_source.updateDateTime == updateDateTime) 
+        ]
+    return selected_df
 def get_rows_by_index(df_source, index_list):
     #return rows selected by index as Pandas DataFrame
 
@@ -95,3 +107,12 @@ def get_unique_person_and_time(df_source):
     sorted_unique_person_and_time = unique_person_and_time.sort_values(by=['person_id','updateDateTime'])
     return sorted_unique_person_and_time.values
 
+def get_unique_person(df_source):
+    #project columns
+    person_and_time = df_source[
+        ['person_id']
+        ]
+    #drop duplicated rows
+    unique_person_and_time = person_and_time.drop_duplicates()
+    sorted_unique_person_and_time = unique_person_and_time.sort_values(by=['person_id'])
+    return sorted_unique_person_and_time.values
