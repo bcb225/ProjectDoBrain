@@ -41,7 +41,7 @@ for index_list in sorted_unique_index:
             df_source = game_df,
             person_and_time = person_and_time
         )
-        if len(game_of_the_person) == 0:
+        if len(game_of_the_person) < 3:
             continue
         png_generator = pngGenerator(
             df_object = game_of_the_person,

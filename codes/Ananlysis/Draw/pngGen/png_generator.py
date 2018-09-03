@@ -14,7 +14,7 @@ class pngGenerator:
     def __init__(self, df_object, index_list, person_and_time):
         self.df_object = df_object
 
-
+        self.get_questionManagerCategory()
         #get height and width info as dict type
         self.height_and_width_dict = self.get_height_and_width()
         self.height = self.height_and_width_dict['screenHeight']
@@ -50,7 +50,15 @@ class pngGenerator:
         }
         print(height_and_width_dict)
         return height_and_width_dict
+    def get_questionManagerCategory(self):
+        questionManagerCategory = self.df_object[
+            ['questionManagerCategory']
+        ]
+        questionManagerCategory_df = questionManagerCategory.drop_duplicates()
+        questionManagerCategory_list = questionManagerCategory.values
 
+        self.questionManagerCategory_txt = questionManagerCategory_list[0][0]
+        
     def draw_png(self):
 
         
@@ -74,8 +82,9 @@ class pngGenerator:
 
     def make_path(self, index_list, person_and_time):
         home = expanduser("~")
-        file_path = '{}/ProjectDoBrain/results/Draw/{}_{}_{}/{}X{}/'.format(
+        file_path = '{}/ProjectDoBrain/results/Draw/{}/{}_{}_{}/{}X{}/'.format(
             home,
+            self.questionManagerCategory_txt,
             index_list[0],
             index_list[1],
             index_list[2],
