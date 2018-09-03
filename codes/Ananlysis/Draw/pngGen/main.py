@@ -22,27 +22,32 @@ options = parse_commands(sys.argv[1:])
 drag_loader = CsvLoader(options.drag_file)
 loaded_drag_df = drag_loader.load()
 
-first_game_df = df_handler.get_rows_by_index(
-    df_source = loaded_drag_df,
-    index_list = [22,7,0]
-)
+sorted_unique_index = df_handler.get_unique_index(loaded_drag_df)
 
-unique_person_and_time_list = df_handler.get_unique_person_and_time(
-    df_source = first_game_df
-)
+#get first content, game index of drag data
+#first_index_list = sorted_unique_index[6]
+i = 0
+for index_list in sorted_unique_index:
+    game_df = df_handler.get_rows_by_index(
+        df_source = loaded_drag_df,
+        index_list = index_list
+    )
+    unique_person_and_time_list = df_handler.get_unique_person_and_time(
+        df_source = game_df
+    )
+    for person_and_time in unique_person_and_time_list:
+        print(index_list, person_and_time)
+        game_of_the_person = df_handler.get_rows_by_person_and_time(
+            df_source = game_df,
+            person_and_time = person_and_time
+        )
+        if len(game_of_the_person) == 0:
+            continue
+        png_generator = pngGenerator(
+            df_object = game_of_the_person,
+            index_list = index_list,
+            person_and_time = person_and_time
+        )
 
-unique_person_list = df_handler.get_unique_person(
-    df_source = first_game_df
-)
-print(first_game_df)
-print(len(unique_person_and_time_list))
-print(len(unique_person_list))
-
-first_game_first_person_df = df_handler.get_row_by_person_and_time(
-    df_source = first_game_df,
-    index_list = unique_person_and_time_list[0]
-)
-
-png_generator = pngGenerator(first_game_first_person_df)
-
-png_generator.draw_png()
+        png_generator.draw_png()
+    
