@@ -74,7 +74,64 @@ class JsonHandler:
                             }
                             result_dict_list.append(temp_dict)
         return result_dict_list
-    
+    def json_lab_data_to_dict_list(self, json_source, person_id):
+        json_text = json.dumps(json_source)
+        json_data = json.loads(json_text)
+        result_dict_list = []
+        try :
+            todayMissionChapterButtonIndexes = json_data['todayMissionChapterButtonIndexes']
+        except:
+            todayMissionChapterButtonIndexes = 'N/A'
+        dateTimeForWeek = json_data['dateTimeForWeek']
+        weekClearMissionCount = json_data['weekClearMissionCount']
+        dateTimeForMonth = json_data['dateTimeForMonth']
+        todayClearMissionCount= json_data['todayClearMissionCount']
+        kidsLabWeekData = json_data['kidsLabWeekData']
+        monthClearMissionCount = json_data['monthClearMissionCount']
+        monthTotalMissionCount = json_data['monthTotalMissionCount']
+        updateDateTime = json_data['updateDateTime']
+        dateTimeForToday = json_data['dateTimeForToday']
+        for kidsLabWeekDatum in kidsLabWeekData:
+            velocityPerceptualPoint = kidsLabWeekDatum['velocityPerceptualPoint']
+            memoryPoint = kidsLabWeekDatum['memoryPoint']
+            startDateTime = kidsLabWeekDatum['startDateTime']
+            creativePoint = kidsLabWeekDatum['creativePoint']
+            weekIndex = kidsLabWeekDatum['weekIndex']
+            spacePerceptualPoint = kidsLabWeekDatum['spacePerceptualPoint']
+            numericalPoint = kidsLabWeekDatum['numericalPoint']
+            discriminationPoint = kidsLabWeekDatum['discriminationPoint']
+            inferencePoint = kidsLabWeekDatum['inferencePoint']
+            try :
+                organizingPoint = kidsLabWeekDatum['organizingPoint']
+            except:
+                organazingPoint = kidsLabWeekDatum['organazingPoint']
+                organizingPoint = organazingPoint
+            temp_dict = {
+                        "person_id" : person_id,
+                        "todayMissionChapterButtonIndexes" : todayMissionChapterButtonIndexes,
+                        "dateTimeForMonth" : dateTimeForMonth,
+                        "dateTimeForWeek" : dateTimeForWeek,
+                        "dateTimeForToday" : dateTimeForToday,
+                        "monthTotalMissionCount" : monthTotalMissionCount,
+                        "monthClearMissionCount" : monthClearMissionCount,
+                        "weekClearMissionCount" : weekClearMissionCount,
+                        "todayClearMissionCount" : todayClearMissionCount,
+                        
+                        "updateDateTime" : updateDateTime,
+                        
+                        "weekIndex" : weekIndex,
+                        "velocityPerceptualPoint" : velocityPerceptualPoint,
+                        "memoryPoint" : memoryPoint,
+                        "startDateTime" : startDateTime,
+                        "creativePoint" : creativePoint,
+                        "spacePerceptualPoint" : spacePerceptualPoint,
+                        "numericalPoint" : numericalPoint,
+                        "discriminationPoint" : discriminationPoint,
+                        "inferencePoint" : inferencePoint,
+                        "organizingPoint" : organizingPoint
+                    }
+            result_dict_list.append(temp_dict)
+        return result_dict_list
     def json_person_id_to_dict_list(self, json_source, mobile_os):
         result_dict_list = []        
         if mobile_os == 'iOS':
