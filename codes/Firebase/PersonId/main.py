@@ -26,6 +26,5 @@ json_handler = JsonHandler()
 csv_handler = CsvHandler(filepath=options.person_file,header_list=header_list)
 
 json_result = rest_handler.get_json_of_person_id()
-result_dict_list = json_handler.json_person_id_to_dict_list(json_source = json_result)
-print(result_dict_list)
+result_dict_list = json_handler.json_person_id_to_dict_list(json_source = json_result, mobile_os=options.mobile_os)
 csv_handler.dict_to_csv(dict_list=result_dict_list)

@@ -75,18 +75,25 @@ class JsonHandler:
                             result_dict_list.append(temp_dict)
         return result_dict_list
     
-    def json_person_id_to_dict_list(self, json_source):
-        #json_text = json.dumps(json_source)
-        json_data = json.loads(json_source)
-        person_id_list = json_data.keys()
-        result_dict_list = []
-        p = re.compile('\w+\-\w+\-\w+\-\w+\-\w+')
-        for elm in person_id_list:
-            if p.match(elm):
+    def json_person_id_to_dict_list(self, json_source, mobile_os):
+        result_dict_list = []        
+        if mobile_os == 'iOS':
+            json_data = json.loads(json_source)
+            person_id_list = json_data.keys()
+            p = re.compile('\w+\-\w+\-\w+\-\w+\-\w+')
+            for elm in person_id_list:
+                if p.match(elm):
+                    temp_dict = {
+                        "person_id" : elm
+                    }
+                    result_dict_list.append(temp_dict)
+        elif mobile_os == 'Android':
+            json_data = json.loads(json_source)
+            person_id_list = json_data.keys()
+            for person_id in person_id_list:
                 temp_dict = {
-                    "person_id" : elm
+                    "person_id" : person_id
                 }
-                print(temp_dict)
                 result_dict_list.append(temp_dict)
         return result_dict_list
     
