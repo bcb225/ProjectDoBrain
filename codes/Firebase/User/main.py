@@ -12,6 +12,7 @@ def parse_commands(argv):
     parser.add_option('-i', '--inputFile', dest='input_file')
     parser.add_option('-o', '--outputFile', dest='output_file')
     parser.add_option('-p', '--personFile', dest='person_file')
+    parser.add_option('-m', '--mobileOs', dest='mobile_os')
     options, otherjunk = parser.parse_args(argv)
     return options
 
@@ -24,7 +25,7 @@ options = parse_commands(sys.argv[1:])
 
 header_list = ['person_id', 'level']
 
-rest_handler = RestHandler()
+rest_handler = RestHandler(mobile_os=options.mobile_os)
 json_handler = JsonHandler()
 csv_handler = CsvHandler(filepath=options.output_file,header_list=header_list)
 
