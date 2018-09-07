@@ -9,8 +9,7 @@ from csv_handler import CsvHandler
 def parse_commands(argv):
     from optparse import OptionParser
     parser = OptionParser('"')
-    parser.add_option('-i', '--inputFile', dest='input_file')
-    parser.add_option('-o', '--outputFile', dest='output_file')
+    parser.add_option('-o', '--outputFile', dest='user_file')
     parser.add_option('-p', '--personFile', dest='person_file')
     parser.add_option('-m', '--mobileOs', dest='mobile_os')
     options, otherjunk = parser.parse_args(argv)
@@ -27,7 +26,7 @@ header_list = ['person_id', 'level']
 
 rest_handler = RestHandler(mobile_os=options.mobile_os)
 json_handler = JsonHandler()
-csv_handler = CsvHandler(filepath=options.output_file,header_list=header_list)
+csv_handler = CsvHandler(filepath=options.user_file,header_list=header_list)
 
 for person_id in person_list:
     json_result = rest_handler.get_user_data_by_person_id(person_id)
