@@ -9,7 +9,7 @@ from csv_handler import CsvHandler
 def parse_commands(argv):
     from optparse import OptionParser
     parser = OptionParser('"')
-    parser.add_option('-o', '--outputFile', dest='user_file')
+    parser.add_option('-o', '--userFile', dest='user_file')
     parser.add_option('-p', '--personFile', dest='person_file')
     parser.add_option('-m', '--mobileOs', dest='mobile_os')
     options, otherjunk = parser.parse_args(argv)
