@@ -11,9 +11,9 @@ from os.path import expanduser
 from PIL import Image
 import scipy
 class pngGenerator:
-    def __init__(self, df_object, index_list, person_and_time):
+    def __init__(self, df_object, index_list, person_and_time,user_level):
         self.df_object = df_object
-
+        self.user_level = user_level
         self.get_questionManagerCategory()
         #get height and width info as dict type
         self.height_and_width_dict = self.get_height_and_width()
@@ -82,14 +82,15 @@ class pngGenerator:
 
     def make_path(self, index_list, person_and_time):
         home = expanduser("~")
-        file_path = '{}/ProjectDoBrain/results/Draw/{}/{}_{}_{}/{}X{}/'.format(
+        file_path = '{}/ProjectDoBrain/results/Draw/{}/{}_{}_{}/{}X{}/{}/'.format(
             home,
             self.questionManagerCategory_txt,
             index_list[0],
             index_list[1],
             index_list[2],
             self.height,
-            self.width
+            self.width,
+            self.user_level
         )
         result_path = '{}/{}.png'.format(
             file_path,
