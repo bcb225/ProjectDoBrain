@@ -82,15 +82,15 @@ class pngGenerator:
 
     def make_path(self, index_list, person_and_time):
         home = expanduser("~")
-        file_path = '{}/ProjectDoBrain/results/Draw/{}/{}_{}_{}/{}X{}/{}/'.format(
+        file_path = '{}/ProjectDoBrain/results/Draw/{}/{}_{}_{}/{}/{}X{}/'.format(
             home,
             self.questionManagerCategory_txt,
             index_list[0],
             index_list[1],
             index_list[2],
+            self.user_level,
             self.height,
-            self.width,
-            self.user_level
+            self.width
         )
         result_path = '{}/{}.png'.format(
             file_path,
