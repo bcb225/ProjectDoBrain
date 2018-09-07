@@ -119,4 +119,4 @@ def get_unique_person(df_source):
 
 def get_user_level_by_person_id(df_source, person_id):
     row = df_source.loc[df_source['person_id']==person_id]
-    return row['person_id']
+    return row['level'].values[0]

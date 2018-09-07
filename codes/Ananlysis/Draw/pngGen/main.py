@@ -47,13 +47,12 @@ for index_list in sorted_unique_index:
             df_source = loaded_user_df,
             person_id = person_and_time[0]
         )
-        print (user_level)
         print(index_list, person_and_time)
         game_of_the_person = df_handler.get_rows_by_person_and_time(
             df_source = game_df,
             person_and_time = person_and_time
         )
-        if len(game_of_the_person) < 3:
+        if len(game_of_the_person) < 20:
             continue
         png_generator = pngGenerator(
             df_object = game_of_the_person,
