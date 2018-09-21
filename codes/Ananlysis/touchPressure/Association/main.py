@@ -1,7 +1,7 @@
 import sys
-from os import path
-sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
-
+from os.path import expanduser
+home = expanduser("~")
+sys.path.append('{}/ProjectDoBrain/codes/Modules'.format(home))
 from csv_loader import CsvLoader
 from association_analyzer import AssociationAnalyzer
 

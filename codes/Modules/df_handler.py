@@ -12,6 +12,7 @@ def get_unique_index(df_source):
     unique_index = all_index.drop_duplicates()
     sorted_unique_index = unique_index.sort_values(by=['contentIndex','questionIndex','derivedQuestionIndex'])
     return sorted_unique_index.values
+    
 def get_rows_by_person_and_time(df_source, person_and_time):
     #return rows selected by index as Pandas DataFrame
 
