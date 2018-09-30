@@ -171,3 +171,100 @@ class JsonHandler:
 
         except:
             return result_dict_list
+
+    def json_lesson_bucket_data_to_dict_list(self, json_source, index):
+        json_text = json.dumps(json_source)
+        json_data = json.loads(json_text)
+        A_result_dict_list = []
+        B_result_dict_list = []
+        C_result_dict_list = []
+
+        level = json_data['level']
+        try:
+            A_result_dict_list = self.lesson_bucket_level_parser(
+            level_dict = level, target_level = 'A', index = index
+            )
+        except:
+            pass
+        
+        try:
+            B_result_dict_list = self.lesson_bucket_level_parser(
+            level_dict = level, target_level = 'B', index = index
+            )
+        except:
+            pass
+        
+        try:
+            C_result_dict_list = self.lesson_bucket_level_parser(
+            level_dict = level, target_level = 'C', index = index
+            )
+        except:
+            pass
+        
+        total_result_dict_list = A_result_dict_list + B_result_dict_list + C_result_dict_list
+        print(total_result_dict_list)
+        return total_result_dict_list
+
+    def lesson_bucket_level_parser(self, level_dict,target_level,index):
+        result_dict_list = []
+        level = level_dict[target_level]
+        categories = level['categories']
+        
+        attentionMemory = categories['attentionMemory']
+        attentionMemoryUsers = attentionMemory['users']
+        
+        constructionalAbility = categories['constructionalAbility']
+        constructionalAbilityUsers = constructionalAbility['users']
+
+        discernment = categories['discernment']
+        discernmentUsers = discernment['users']
+
+        logicalReasoning = categories['logicalReasoning']
+        logicalReasoningUsers = logicalReasoning['users']
+
+        mathematicalThinking = categories['mathematicalThinking']
+        mathematicalThinkingUsers = mathematicalThinking['users']
+
+        reaction = categories['reaction']
+        reactionUsers = reaction['users']
+
+        spatialPerception = categories['spatialPerception']
+        spatialPerceptionUsers = spatialPerception['users']
+        
+        attentionMemoryKeySet = set(attentionMemoryUsers.keys())
+        constructionalAbilityKeySet = set(constructionalAbilityUsers.keys())
+        discernmentKeySet = set(discernmentUsers.keys())
+        logicalReasoningKeySet = set(logicalReasoningUsers.keys())
+        mathematicalThinkingKeySet = set(mathematicalThinkingUsers.keys())
+        reactionKeySet = set(reactionUsers.keys())
+        spatialPerceptionKeySet = set(spatialPerceptionUsers.keys())
+
+        intersection_keys = attentionMemoryKeySet.intersection(
+            constructionalAbilityKeySet.intersection(
+                discernmentKeySet.intersection(
+                    logicalReasoningKeySet.intersection(
+                        mathematicalThinkingKeySet.intersection(
+                            reactionKeySet.intersection(
+                                spatialPerceptionKeySet
+                            )
+                        )
+                    )
+                )
+            )
+        )
+
+        for key in intersection_keys:
+            temp_dict = {
+                        "index" : index,
+                        "person_id" : key,
+                        "level" : target_level,
+                        "attentionMemory" : attentionMemoryUsers[key],
+                        "constructionalAbility" : constructionalAbilityUsers[key],
+                        "discernment" : discernmentUsers[key],
+                        "logicalReasoning" : logicalReasoningUsers[key],
+                        "mathematicalThinking" : mathematicalThinkingUsers[key],
+                        "reaction" : reactionUsers[key],
+                        "spatialPerception" : spatialPerceptionUsers[key]
+                    }
+            result_dict_list.append(temp_dict)
+        return(result_dict_list)

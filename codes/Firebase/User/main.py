@@ -11,7 +11,7 @@ def parse_commands(argv):
     parser = OptionParser('"')
     parser.add_option('-o', '--userFile', dest='user_file')
     parser.add_option('-p', '--personFile', dest='person_file')
-    parser.add_option('-m', '--mobileOs', dest='mobile_os')
+    parser.add_option('-m', '--mobileOS', dest='mobile_os')
     options, otherjunk = parser.parse_args(argv)
     return options
 
