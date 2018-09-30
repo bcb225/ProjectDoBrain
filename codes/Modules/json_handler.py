@@ -268,3 +268,28 @@ class JsonHandler:
                     }
             result_dict_list.append(temp_dict)
         return(result_dict_list)
+
+    def json_survey_data_to_dict(self, json_source):
+        result_dict_list = []
+        json_text = json.dumps(json_source)
+        json_data = json.loads(json_text)
+        for person_id in json_data:
+            person_survey = json_data[person_id]
+            try :
+                diagnosedDiseases = person_survey['diagnosedDiseases']
+                print(diagnosedDiseases)
+                for diagnosedDisease in diagnosedDiseases:
+                    utf8_diagnosedDisease = diagnosedDisease.encode("utf-8")
+                    temp_dict = {
+                        'person_id' : person_id,
+                        'diagnosedDisease' : utf8_diagnosedDisease
+                    }
+                    print(utf8_diagnosedDisease)
+                    result_dict_list.append(temp_dict)
+            except:
+                temp_dict = {
+                        'person_id' : person_id,
+                        'diagnosedDisease' : 'N/A'
+                    }
+                result_dict_list.append(temp_dict)
+        return result_dict_list
