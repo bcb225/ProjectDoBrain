@@ -22,7 +22,7 @@ with open(options.person_file) as person_file:
 
 options = parse_commands(sys.argv[1:])
 
-header_list = ['person_id', 'level']
+header_list = ['person_id', 'level', 'game_level','clear_date_time','Memory','VelocityPerceptual','Numerical','Discrimination','SpacePerceptual','Inference','Organizing','Creative']
 
 rest_handler = RestHandler(mobile_os=options.mobile_os)
 json_handler = JsonHandler()
