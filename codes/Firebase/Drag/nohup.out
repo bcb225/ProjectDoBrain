@@ -1,0 +1,24 @@
+('000123DB-6507-424D-86A2-770DB247D396', 9470)
+('004E275B-50B4-4E38-8E63-6AC5D96356D0', 2903)
+('008C6EC8-87CC-474A-A663-C1C200745928', 7386)
+('00964041-59F9-4BA6-816A-C4BAF6B602F3', 1839)
+('009CF794-35F3-4E5C-A2B0-6FF962A6A1D1', 762)
+('00A8BC12-D076-4FED-9470-D1DF9790D054', 218)
+('00AE9306-FA80-4327-B169-64C39CAB44CC', 6139)
+('00E97799-4142-49A6-B81B-DBF4CA7F1CF1', 720)
+Traceback (most recent call last):
+  File "main.py", line 34, in <module>
+    json_result = rest_handler.get_json_by_person_id(person_id)
+  File "/home/teambio/ProjectDoBrain/codes/Firebase/Drag/rest_handler.py", line 10, in get_json_by_person_id
+    resp = requests.get(url=target_url)
+  File "/usr/local/lib/python2.7/dist-packages/requests/api.py", line 72, in get
+    return request('get', url, params=params, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/requests/api.py", line 58, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/requests/sessions.py", line 508, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/requests/sessions.py", line 618, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/requests/adapters.py", line 506, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='dobrain-pro.firebaseio.com', port=443): Max retries exceeded with url: /drag_data/iOS/011780E1-4DBC-4E58-BEDA-E7B5E4FB406D.json (Caused by SSLError(SSLEOFError(8, u'EOF occurred in violation of protocol (_ssl.c:590)'),))

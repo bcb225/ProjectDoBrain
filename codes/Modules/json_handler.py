@@ -1,5 +1,7 @@
 import json
 import regex as re
+import datetime
+import dateutil.parser
 class JsonHandler:
     def __init__(self):
         pass
@@ -171,7 +173,65 @@ class JsonHandler:
 
         except:
             return result_dict_list
-
+    def json_user_score_data_to_dict_list(self, json_source, person_id, content_num):
+        json_data = json.loads(json_source)
+        result_dict_list = []
+        score_name_list = ['Memory','VelocityPerceptual','Numerical','Discrimination','SpacePerceptual','Inference','Organizing','Creative']
+        score_name_list_set = set(score_name_list)
+        category_list = []
+        try:
+            level = json_data['level']
+            userContentsDatum = json_data['userContentsData']
+            contentData = userContentsDatum[content_num]
+            clearDateTimes = contentData['clearDateTimes']
+            first_time = clearDateTimes[0]
+            parsed_first_time = dateutil.parser.parse(first_time)
+            
+            userQuestionDatum = contentData['userQuestionData']
+            score_list = []
+            for userQuestionData in userQuestionDatum:
+                point_list = []
+                category = userQuestionData['categories'][0]
+                category_list.append(category)
+                if category == '':
+                    return result_dict_list
+                userDerivedQuestionDatum = userQuestionData['userDerivedQuestionData']
+                for userDerivedQuestionData in userDerivedQuestionDatum:
+                    game_time = userDerivedQuestionData['clearDateTime']
+                    parsed_game_time = dateutil.parser.parse(game_time)
+                    if parsed_game_time <= parsed_first_time:
+                        point = userDerivedQuestionData['point']
+                        game_level = userDerivedQuestionData['level']
+                        point_list.append(point)
+                        
+                
+                avg_point = sum(point_list)/len(point_list)
+                
+                score_list.append([category, avg_point])
+            
+            category_list_set = set(category_list)
+            if category_list_set != score_name_list_set:
+                print(person_id + ' ABORTED(different score list)')
+                print(category_list)
+                return result_dict_list
+            if len(score_list) != 8:
+                print(person_id + ' ABORTED(less score list)')
+                return result_dict_list
+            temp_dict = {
+                'person_id' : person_id,
+                'level' : level,
+                'game_level' : game_level,
+                'clear_date_time' : first_time
+            }
+            for score in score_list:
+                temp_dict[score[0]] = score[1]
+            
+            result_dict_list.append(temp_dict)
+            print(person_id + ' COMPLETED')
+            return result_dict_list
+        except:
+            print(person_id + ' ABORTED(cannot locate)')
+            return result_dict_list
     def json_lesson_bucket_data_to_dict_list(self, json_source, index):
         json_text = json.dumps(json_source)
         json_data = json.loads(json_text)
