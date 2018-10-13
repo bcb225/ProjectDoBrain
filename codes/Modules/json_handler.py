@@ -211,8 +211,7 @@ class JsonHandler:
             
             category_list_set = set(category_list)
             if category_list_set != score_name_list_set:
-                print(person_id + ' ABORTED(different score list)')
-                print(category_list)
+                print(person_id + ' ABORTED(different score list)' +category_list)
                 return result_dict_list
             if len(score_list) != 8:
                 print(person_id + ' ABORTED(less score list)')
