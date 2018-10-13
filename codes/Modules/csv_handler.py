@@ -2,7 +2,7 @@ import csv
 
 class CsvHandler:
     def __init__(self,filepath,header_list):
-        self.csvFile = open(filepath, "wb")
+        self.csvFile = open(filepath, "w")
         self.csvWriter = csv.writer(self.csvFile, delimiter = ',')
         self.header_list = header_list
         if set(self.header_list) == set(['person_id']):
