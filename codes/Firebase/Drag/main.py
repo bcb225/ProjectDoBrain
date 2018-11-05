@@ -3,7 +3,6 @@ from os.path import expanduser
 home = expanduser("~")
 
 sys.path.append('{}/ProjectDoBrain/codes/Modules'.format(home))
-from firebase_connector import FirebaseConnector
 from rest_handler import RestHandler
 from json_handler import JsonHandler
 from csv_handler import CsvHandler
