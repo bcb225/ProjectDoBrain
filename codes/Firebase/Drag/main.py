@@ -14,6 +14,7 @@ def parse_commands(argv):
     parser.add_option('-o', '--dragFile', dest='drag_file')
     parser.add_option('-p', '--personFile', dest='person_file')
     parser.add_option('-m', '--mobileOS', dest='mobile_os')
+    parser.add_option('-j', '--jsonFile', dest='json_file')
 
     options, otherjunk = parser.parse_args(argv)
     return options
