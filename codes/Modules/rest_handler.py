@@ -45,8 +45,7 @@ class RestHandler:
         target_url = self.survey_url + '.json'
         resp = requests.get(url = target_url)
         json_result = resp.json()
-        json_text = json.dumps(json_result)
-        return json_text
+        return json_result
 
     def get_user_score_data_by_person_id(self, person_id):
         target_url = self.user_url + person_id + '.json'
