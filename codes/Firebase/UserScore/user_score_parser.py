@@ -1,4 +1,5 @@
 import sys
+import re
 from os.path import expanduser
 home = expanduser("~")
 sys.path.append('{}/ProjectDoBrain/codes/Modules'.format(home))
@@ -27,7 +28,8 @@ for i in range(0,options.num_content):
     f = open(options.json_file, 'r')
     line = f.readline()
     while line:
-        result_dict_list=json_handler.json_user_score_data_to_dict_list_no_person_id(line,,i)
+        line_splited = re.split(r'\t',line)
+        result_dict_list=json_handler.json_user_score_data_to_dict_list(line[1],line_splited[0],i)
         csv_handler.dict_to_csv(dict_list=result_dict_list)
         line = f.readline()
     f.close()
