@@ -173,6 +173,7 @@ class JsonHandler:
 
         except:
             return result_dict_list
+    def json_user_score_data_to_dict_list_no_person_id(self, json_source, content_num):
     def json_user_score_data_to_dict_list(self, json_source, person_id, content_num):
         json_data = json.loads(json_source)
         result_dict_list = []
