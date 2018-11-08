@@ -26,7 +26,7 @@ json_handler = JsonHandler()
 
 for i in range(0,int(options.num_content)):
     f = open(options.json_file, 'r')
-    csv_handler = CsvHandler(filepath=options.file_offset+'_'+i+'.csv',header_list=header_list)
+    csv_handler = CsvHandler(filepath=file_offset+'_'+i+'.csv',header_list=header_list)
     line = f.readline()
     while line:
         line_splited = re.split(r'\t',line)
