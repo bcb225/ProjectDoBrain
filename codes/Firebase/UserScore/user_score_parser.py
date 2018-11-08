@@ -24,7 +24,7 @@ file_offset = filename_splitted[0]
 
 json_handler = JsonHandler()
 
-for i in range(0,options.num_content):
+for i in range(0,int(noptions.num_content)):
     f = open(options.json_file, 'r')
     csv_handler = CsvHandler(filepath=options.file_offset+'_'+i+'.csv',header_list=header_list)
     line = f.readline()
