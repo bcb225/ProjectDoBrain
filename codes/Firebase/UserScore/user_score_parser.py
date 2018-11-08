@@ -19,13 +19,15 @@ options = parse_commands(sys.argv[1:])
 
 header_list = ['person_id', 'level', 'game_level','clear_date_time','Memory','VelocityPerceptual','Numerical','Discrimination','SpacePerceptual','Inference','Organizing','Creative']
 
+filename_splitted = line_splited = re.split(r'.',options.json_file)
+file_offset = filename_splitted[0]
+
 rest_handler = RestHandler(mobile_os=options.mobile_os)
 json_handler = JsonHandler()
-csv_handler = CsvHandler(filepath=options.user_score_file,header_list=header_list)
-
 
 for i in range(0,options.num_content):
     f = open(options.json_file, 'r')
+    csv_handler = CsvHandler(filepath=options.file_offset+'_'+i+'.csv',header_list=header_list)
     line = f.readline()
     while line:
         line_splited = re.split(r'\t',line)
