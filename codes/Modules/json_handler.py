@@ -2,6 +2,7 @@ import json
 import regex as re
 import datetime
 import dateutil.parser
+from pprint import pprint
 class JsonHandler:
     def __init__(self):
         pass
@@ -228,8 +229,8 @@ class JsonHandler:
             result_dict_list.append(temp_dict)
             print(person_id + ' COMPLETED')
             return result_dict_list
-        except:
-            print(person_id + ' ABORTED(cannot locate)')
+        except Exception as e:
+            print(person_id + ' ABORTED(cannot locate)'+str(e))
             return result_dict_list
     def json_lesson_bucket_data_to_dict_list(self, json_source, index):
         json_text = json.dumps(json_source)
