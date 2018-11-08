@@ -22,7 +22,6 @@ header_list = ['person_id', 'level', 'game_level','clear_date_time','Memory','Ve
 filename_splitted = line_splited = re.split(r'.',options.json_file)
 file_offset = filename_splitted[0]
 
-rest_handler = RestHandler(mobile_os=options.mobile_os)
 json_handler = JsonHandler()
 
 for i in range(0,options.num_content):
