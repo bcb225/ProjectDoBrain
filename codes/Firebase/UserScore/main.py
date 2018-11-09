@@ -32,7 +32,10 @@ csv_handler = CsvHandler(filepath=options.user_score_file,header_list=header_lis
 f = open(options.json_file, 'w')
 content_num = 0
 for person_id in person_list:
-    json_result = rest_handler.get_user_score_data_by_person_id(person_id)
+    try:
+        json_result = rest_handler.get_user_score_data_by_person_id(person_id)
+    except:
+        continue
     f.write(person_id+'\t'+json_result+'\n')
     result_dict_list = json_handler.json_user_score_data_to_dict_list(json_result,person_id, content_num)
     csv_handler.dict_to_csv(dict_list=result_dict_list)
