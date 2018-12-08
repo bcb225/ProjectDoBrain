@@ -339,12 +339,12 @@ class JsonHandler:
                 diagnosedDiseases = person_survey['diagnosedDiseases']
                 print(diagnosedDiseases)
                 for diagnosedDisease in diagnosedDiseases:
-                    utf8_diagnosedDisease = diagnosedDisease.encode("utf-8")
+                    diagnosedDisease = diagnosedDisease
                     temp_dict = {
                         'person_id' : person_id,
-                        'diagnosedDisease' : utf8_diagnosedDisease
+                        'diagnosedDisease' : diagnosedDisease
                     }
-                    print(utf8_diagnosedDisease)
+                    print(diagnosedDisease)
                     result_dict_list.append(temp_dict)
             except:
                 temp_dict = {
