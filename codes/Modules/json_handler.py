@@ -353,3 +353,15 @@ class JsonHandler:
                     }
                 result_dict_list.append(temp_dict)
         return result_dict_list
+
+    def user_json_to_birthday(self, person_id,json_source):
+        result_dict_list = []
+        json_data = json.loads(json_source)
+        birthday = json_data['birthday']
+        temp_dict = {
+                'person_id' : person_id,
+                'birthday' : birthday
+            }
+        result_dict_list.append(temp_dict)
+
+        return result_dict_list
