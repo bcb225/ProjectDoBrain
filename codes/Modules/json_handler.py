@@ -343,6 +343,7 @@ class JsonHandler:
                     'worryingCategory' : 'N/A',
                     'diagnosedDisease' : 'N/A'
                 }
+                result_dict_list.append(temp_dict)
             elif wonDiagnosis == '진단받은 적은 없으나, 염려된다' or wonDiagnosis == 'No, but I\'m worried':
                 worryingCategories = person_survey['worryingCategories']
                 print(worryingCategories)
@@ -353,6 +354,7 @@ class JsonHandler:
                         'worryingCategory' : worryingCategory,
                         'diagnosedDisease' : 'N/A'
                     }
+                    result_dict_list.append(temp_dict)
             elif wonDiagnosis == '있다' or wonDiagnosis == 'Yes':
                 diagnosedDiseases = person_survey['diagnosedDiseases']
                 for diagnosedDisease in diagnosedDiseases:
@@ -363,9 +365,10 @@ class JsonHandler:
                         'worryingCategory' : 'N/A',
                         'diagnosedDisease' : diagnosedDisease
                     }
+                    result_dict_list.append(temp_dict)
             else:
                 print(wonDiagnosis)
-            result_dict_list.append(temp_dict)
+            
         return result_dict_list
 
     def user_json_to_birthday(self, person_id,json_source):
