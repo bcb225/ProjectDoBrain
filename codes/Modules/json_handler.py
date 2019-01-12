@@ -335,23 +335,37 @@ class JsonHandler:
         json_data = json.loads(json_text)
         for person_id in json_data:
             person_survey = json_data[person_id]
-            try :
+            wonDiagnosis = person_survey['wonDiagnosis']
+            if wonDiagnosis == '없다' or wonDiagnosis == 'No':
+                temp_dict = {
+                    'person_id' : person_id,
+                    'wonDiagnosis' : 'N/A',
+                    'worryingCategory' : 'N/A',
+                    'diagnosedDisease' : 'N/A'
+                }
+            elif wonDiagnosis == '진단받은 적은 없으나, 염려된다' or wonDiagnosis == 'No, but I\'m worried':
+                worryingCategories = person_survey['worryingCategories']
+                print(worryingCategories)
+                for worryingCategory in worryingCategories:
+                    temp_dict = {
+                        'person_id' : person_id,
+                        'wonDiagnosis' : 'Worry',
+                        'worryingCategory' : worryingCategory,
+                        'diagnosedDisease' : 'N/A'
+                    }
+            elif wonDiagnosis == '있다' or wonDiagnosis == 'Yes':
                 diagnosedDiseases = person_survey['diagnosedDiseases']
-                print(diagnosedDiseases)
                 for diagnosedDisease in diagnosedDiseases:
                     diagnosedDisease = diagnosedDisease
                     temp_dict = {
                         'person_id' : person_id,
+                        'wonDiagnosis' : 'Diagnosed',
+                        'worryingCategory' : 'N/A',
                         'diagnosedDisease' : diagnosedDisease
                     }
-                    print(diagnosedDisease)
-                    result_dict_list.append(temp_dict)
-            except:
-                temp_dict = {
-                        'person_id' : person_id,
-                        'diagnosedDisease' : 'N/A'
-                    }
-                result_dict_list.append(temp_dict)
+            else:
+                print(wonDiagnosis)
+            result_dict_list.append(temp_dict)
         return result_dict_list
 
     def user_json_to_birthday(self, person_id,json_source):
