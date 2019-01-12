@@ -18,9 +18,8 @@ def parse_commands(argv):
 
 options = parse_commands(sys.argv[1:])
 f = open(options.json_file, 'w')
-
 header_list = [
-    'person_id', 'diagnosedDisease'
+    'person_id','wonDiagnosis','worryingCategory','diagnosedDisease'
     ]
 
 rest_handler = RestHandler(mobile_os=options.mobile_os)
