@@ -17,21 +17,23 @@ class JsonHandler:
             updateDateTime = 'N/A'
         screenHeight = json_data['_screenHeight']
         screenWidth = json_data['_screenWidth']
-
+        deviceModel = json_data['_deviceModel']
+        deviceName = json_data['_deviceName']
+        dpi = json_data['_dpi']
         try:
             userLevels = json_data['_userLevels']
             for userLevel in userLevels:
                 level = userLevel['_level']
                 contentDragData = userLevel['contentDragData']
-                temp_dict_list = self.contentDragData_parser(contentDragData,updateDateTime,screenHeight,screenWidth,level,person_id)
+                temp_dict_list = self.contentDragData_parser(contentDragData,updateDateTime,screenHeight,screenWidth,level,person_id,deviceModel,deviceName,dpi)
                 result_dict_list = result_dict_list + temp_dict_list
         
         except:
             level = 'N/A'
             contentDragData = json_data['contentDragData']
-            result_dict_list = self.contentDragData_parser(contentDragData,updateDateTime,screenHeight,screenWidth,level,person_id)
+            result_dict_list = self.contentDragData_parser(contentDragData,updateDateTime,screenHeight,screenWidth,level,person_id,deviceModel,deviceName,dpi)
         return result_dict_list
-    def contentDragData_parser(self,contentDragData,updateDateTime,screenHeight,screenWidth,level,person_id):
+    def contentDragData_parser(self,contentDragData,updateDateTime,screenHeight,screenWidth,level,person_id,deviceModel,deviceName,dpi):
         result_dict_list = []
         for contentDragDatum in contentDragData:
             contentIndex = contentDragDatum["_index"]
@@ -61,6 +63,9 @@ class JsonHandler:
                             temp_dict = {
                                 "person_id" : person_id,
                                 "updateDateTime" : updateDateTime,
+                                "deviceModel" : deviceModel,
+                                "deviceName" : deviceName,
+                                "dpi" : dpi,
                                 "screenHeight" : screenHeight,
                                 "screenWidth" : screenWidth,
                                 "level" : level,
