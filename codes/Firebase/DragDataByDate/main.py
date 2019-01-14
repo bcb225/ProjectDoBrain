@@ -19,7 +19,7 @@ def parse_commands(argv):
 
 options = parse_commands(sys.argv[1:])
 
-header_list = ["person_id", "updateDateTime", "screenHeight", "screenWidth",
+header_list = ["person_id","deviceModel","deviceName","dpi", "updateDateTime", "screenHeight", "screenWidth",
                 "level", "contentIndex", "questionIndex", "derivedQuestionIndex",
                 "questionManagerCategory", "dragDataSetCreationDateTime",
                 "dragDataCreationDateTime", "isOnCorrectAnswer", 

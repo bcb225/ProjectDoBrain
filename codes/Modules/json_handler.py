@@ -17,9 +17,19 @@ class JsonHandler:
             updateDateTime = 'N/A'
         screenHeight = json_data['_screenHeight']
         screenWidth = json_data['_screenWidth']
-        deviceModel = json_data['_deviceModel']
-        deviceName = json_data['_deviceName']
-        dpi = json_data['_dpi']
+        try:
+            deviceModel = json_data['_deviceModel']
+        except:
+            deviceModel = ""
+
+        try:
+            deviceName = json_data['_deviceName']
+        except:
+            deviceName = ""
+        try:
+            dpi = json_data['_dpi']
+        except:
+            dpi = ""
         try:
             userLevels = json_data['_userLevels']
             for userLevel in userLevels:
