@@ -39,8 +39,6 @@ for idx, date in enumerate(date_list):
         print('Date 1970/01/01')
         continue
     print('[{}], ({}/{}) Now Collecting'.format(date,idx+1,len(date_list)))
-    if idx > 2:
-        break
     for mobile_os in ('iOS', 'Android'):
         print('\t{}'.format(mobile_os))
         person_list_json = rest_handler.get_json_of_person_id_by_date(date,mobile_os)
