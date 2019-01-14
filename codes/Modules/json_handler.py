@@ -157,6 +157,29 @@ class JsonHandler:
                 result_dict_list.append(temp_dict)
         return result_dict_list
     
+    def json_to_person_list(self, json_source, mobile_os):
+        result_list = []
+        try:
+            if mobile_os == 'iOS':
+                json_data = json.loads(json_source)
+                person_id_list = json_data.keys()
+                p = re.compile('\w+\-\w+\-\w+\-\w+\-\w+')
+                for elm in person_id_list:
+                    result_list.append(elm)
+            elif mobile_os == 'Android':
+                json_data = json.loads(json_source)
+                person_id_list = json_data.keys()
+                for person_id in person_id_list:
+                    result_list.append(person_id)
+        except:
+            pass
+        return result_list
+
+    def json_to_date_list(self,json_source):
+        json_data = json.loads(json_source)
+        date_list = list(json_data.keys())
+        return date_list
+            
     def json_user_data_to_dict_list(self, json_source, person_id):
         json_data = json.loads(json_source)
         result_dict_list = []
