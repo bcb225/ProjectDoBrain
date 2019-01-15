@@ -44,9 +44,10 @@ for idx, date in enumerate(date_list):
         person_list_json = rest_handler.get_json_of_person_id_by_date(date,mobile_os)
         person_list = json_handler.json_to_person_list(person_list_json,mobile_os)
         if len(person_list) == 0:
+            print('\tNo Person.')
             continue
         for person_id in person_list:
             drag_data_json = rest_handler.get_json_by_date_and_person_id(date,person_id,mobile_os)
             temp_dict_list = json_handler.json_to_dict_list(json_source = drag_data_json,person_id =person_id)
-            result_dict_list += temp_dict_list
-csv_handler.dict_to_csv(result_dict_list)
+            #result_dict_list += temp_dict_list
+            csv_handler.dict_to_csv(temp_dict_list)
