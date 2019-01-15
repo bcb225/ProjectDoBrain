@@ -366,7 +366,13 @@ class JsonHandler:
                     }
             result_dict_list.append(temp_dict)
         return(result_dict_list)
-
+    def json_survey_data_to_person_list(self,json_source):
+        result_list = []
+        json_text = json.dumps(json_source)
+        json_data = json.loads(json_text)
+        for person_id in json_data:
+            result_list.append(person_id)
+        return result_list
     def json_survey_data_to_dict(self, json_source):
         result_dict_list = []
         json_text = json.dumps(json_source)
