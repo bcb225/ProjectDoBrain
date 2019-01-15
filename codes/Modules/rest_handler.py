@@ -24,7 +24,7 @@ class RestHandler:
                 resp.raise_for_status()
                 is_get_not_completed = False
             except requests.exceptions.Timeout as errt:
-                print ("Timeout Error:",errt)
+                print ("Timeout Error: {}, Person : {}".format(errt,person_id))
 
         json_result = resp.json()
         return json_result
