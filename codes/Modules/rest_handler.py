@@ -16,7 +16,16 @@ class RestHandler:
         return json_result
     def get_json_by_date_and_person_id(self,date,person_id,mobile_os):
         target_url = self.drag_data_by_date_url +'/'+date+'/' + mobile_os+'/'+person_id+'.json'
-        resp = requests.get(url=target_url)
+        is_get_not_completed = True
+        
+        while is_get_not_completed:
+            try:
+                resp = requests.get(url=target_url, timeout=60)
+                resp.raise_for_status()
+                is_get_not_completed = False
+            except requests.exceptions.Timeout as errt:
+                print ("Timeout Error:",errt)
+        
         json_result = resp.json()
         return json_result
     def get_json_of_date_list(self):
