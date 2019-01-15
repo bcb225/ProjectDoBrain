@@ -51,3 +51,4 @@ for idx, date in enumerate(date_list):
             temp_dict_list = json_handler.json_to_dict_list(json_source = drag_data_json,person_id =person_id)
             result_dict_list += temp_dict_list
     csv_handler.dict_to_csv(result_dict_list)
+    del result_dict_list
