@@ -43,8 +43,8 @@ for mobile_os in ('iOS','Android'):
     temp_person_list = json_handler.json_survey_data_to_person_list(survey_json)
     survey_person_list += temp_person_list
 survey_person_set = set(survey_person_list)
-#for idx, date in enumerate(date_list):
-for idx, date in enumerate(['1970-01-01','2019-02-07']):
+for idx, date in enumerate(date_list):
+#for idx, date in enumerate(['1970-01-01','2019-02-07']):
     #result_dict_list = []
     if date == '1970/01/01':
         print('Date 1970/01/01')
