@@ -1,5 +1,7 @@
 import sys
 import json
+import gc
+
 from os.path import expanduser
 home = expanduser("~")
 
@@ -33,7 +35,8 @@ csv_handler = CsvHandler(filepath=options.drag_file,header_list=header_list)
 #f = open(options.json_file, 'w')
 date_list_json = rest_handler.get_json_of_date_list()
 date_list = json_handler.json_to_date_list(date_list_json)
-for idx, date in enumerate(date_list):
+#for idx, date in enumerate(date_list):
+for idx, date in enumerate(['1970-01-01','2019-02-07']):
     result_dict_list = []
     if date == '1970/01/01':
         print('Date 1970/01/01')
@@ -51,6 +54,5 @@ for idx, date in enumerate(date_list):
             temp_dict_list = json_handler.json_to_dict_list(json_source = drag_data_json,person_id =person_id)
             result_dict_list += temp_dict_list
     csv_handler.dict_to_csv(result_dict_list)
-    print(sys.getsizeof(result_dict_list))
     del result_dict_list
-    print(sys.getsizeof(result_dict_list))
+    gc.collect()
