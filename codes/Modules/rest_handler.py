@@ -20,12 +20,12 @@ class RestHandler:
         
         while is_get_not_completed:
             try:
-                resp = requests.get(url=target_url, timeout=60)
+                resp = requests.get(url=target_url, timeout=(6,27))
                 resp.raise_for_status()
                 is_get_not_completed = False
             except requests.exceptions.Timeout as errt:
                 print ("Timeout Error:",errt)
-        
+
         json_result = resp.json()
         return json_result
     def get_json_of_date_list(self):
