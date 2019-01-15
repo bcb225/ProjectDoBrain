@@ -20,7 +20,7 @@ class RestHandler:
         
         while is_get_not_completed:
             try:
-                resp = requests.get(url=target_url, timeout=(6,27))
+                resp = requests.get(url=target_url, timeout=(6.05,27))
                 resp.raise_for_status()
                 is_get_not_completed = False
             except requests.exceptions.Timeout as errt:
