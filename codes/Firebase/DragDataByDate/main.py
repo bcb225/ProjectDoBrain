@@ -40,9 +40,9 @@ for idx, date in enumerate(date_list):
         continue
     print('[{}], ({}/{}) Now Collecting'.format(date,idx+1,len(date_list)))
     for mobile_os in ('iOS', 'Android'):
-        print('\t{}'.format(mobile_os))
         person_list_json = rest_handler.get_json_of_person_id_by_date(date,mobile_os)
         person_list = json_handler.json_to_person_list(person_list_json,mobile_os)
+        print('\t{}, User : {}'.format(mobile_os,len(person_list)))
         if len(person_list) == 0:
             print('\tNo Person.')
             continue
