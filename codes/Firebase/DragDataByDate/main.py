@@ -35,8 +35,8 @@ csv_handler = CsvHandler(filepath=options.drag_file,header_list=header_list)
 #f = open(options.json_file, 'w')
 date_list_json = rest_handler.get_json_of_date_list()
 date_list = json_handler.json_to_date_list(date_list_json)
-#for idx, date in enumerate(date_list):
-for idx, date in enumerate(['1970-01-01','2019-02-07']):
+for idx, date in enumerate(date_list):
+#for idx, date in enumerate(['1970-01-01','2019-02-07']):
     result_dict_list = []
     if date == '1970/01/01':
         print('Date 1970/01/01')
