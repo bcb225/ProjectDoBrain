@@ -43,6 +43,12 @@ for mobile_os in ('iOS','Android'):
     temp_person_list = json_handler.json_survey_data_to_person_list(survey_json)
     survey_person_list += temp_person_list
 survey_person_set = set(survey_person_list)
+survey_person_set.add('3c234013d1ec58644fe3779b67542e45')
+survey_person_set.add('48f116a8d36c91fa878653d625b75102')
+survey_person_set.add('ac3af7c24fb5dd6a21246fb8d3203a1f')
+survey_person_set.add('9e50490e225486262f37e2a9f220d7da')
+survey_person_set.add('4ea63ce37fafb10cc4a66ea0e5f42bdd')
+
 for idx, date in enumerate(date_list):
 #for idx, date in enumerate(['1970-01-01','2019-02-07']):
     #result_dict_list = []
