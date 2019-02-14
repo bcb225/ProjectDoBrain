@@ -212,6 +212,27 @@ class JsonHandler:
 
         except:
             return result_dict_list
+    def score_json_to_dict_list(self, json_source, person_id):
+        json_text = json.dumps(json_source)
+        json_data = json.loads(json_text)
+        result_dict_list = []
+        list_data = json_data['list']
+        for data in list_data:
+            temp_dict = {
+                'person_id' : person_id,
+                'chapterIndex': data['chapterIndex'],
+                'clearDateTime': data['clearDateTime'],
+                'contentIndex': data['contentIndex'],
+                'derivedIndex': data['derivedIndex'],
+                'duration': data['duration'],
+                'incorrectAnswerCount': data['incorrectAnswerCount'],
+                'level': data['level'],
+                'point': data['point'],
+                'questionIndex' : data['questionIndex']
+            }
+            result_dict_list.append(temp_dict)
+        return result_dict_list
+
     def json_user_score_data_to_dict_list(self, json_source, person_id, content_num):
         json_data = json.loads(json_source)
         result_dict_list = []
