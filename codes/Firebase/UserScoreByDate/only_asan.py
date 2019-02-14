@@ -30,7 +30,7 @@ header_list = [
     ]
 rest_handler = RestHandler()
 json_handler = JsonHandler()
-csv_handler = CsvHandler(filepath=options.drag_file,header_list=header_list)
+csv_handler = CsvHandler(filepath=options.score_file,header_list=header_list)
 
 #f = open(options.json_file, 'w')
 date_list_json = rest_handler.get_score_json_of_date_list()
